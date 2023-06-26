@@ -39,7 +39,7 @@ class MainGUI():
     def Preprocess_Text(text):
         pass
     
-    def predict_category():
+    def Summarize():
         pass
         
                 
@@ -71,12 +71,9 @@ class MainGUI():
 
     def TrainClassifierPage():
         MainGUI.DestroyAll()
-        
         global classifierComboBox
-      
         ConfirmButton = customtkinter.CTkButton(Main, text="Confirm", command=lambda: MainGUI.Go_Train(), width=100, height=50, font=("System", 30, "bold"), fg_color="darkgreen")
         QuitButton = customtkinter.CTkButton(Main, text="Quit", command=quit, width=100, height=50, font=("System", 30, "bold"), fg_color="darkgreen")
-
         classifierComboBox.place(x=Main.winfo_screenwidth()/2 - 520, y=Main.winfo_screenheight()/2 - 250, anchor="center")
         ConfirmButton.place(x=Main.winfo_screenwidth()/2 - 220, y=Main.winfo_screenheight() /2 - 250, anchor="center")
         QuitButton.place(x=Main.winfo_screenwidth()/2 - 120,y=Main.winfo_screenheight() / 2 - 50, anchor="center")
@@ -94,7 +91,7 @@ class MainGUI():
         MainGUI.DestroyAll()
         ChooseFileLabel = customtkinter.CTkLabel(Main, text="Input An Article", font=("System", 40, "bold"))
         classifierLabel = customtkinter.CTkLabel(Main, text="AraBERT", font=("System", 10, "bold"))
-        Classify_Button = customtkinter.CTkButton(Main, text="Classify",width=200, height=62, font=("System", 30, "bold"), fg_color="darkgreen", command=lambda:MainGUI.predict_category())
+        Classify_Button = customtkinter.CTkButton(Main, text="Summarize",width=200, height=62, font=("System", 30, "bold"), fg_color="darkgreen", command=lambda:MainGUI.Summarize())
         Clear_Btn = customtkinter.CTkButton(Main, text="Clear",width=180, height=62, font=("System", 30, "bold"), fg_color="darkgreen", command=lambda:MainGUI.ClearText())
 
         global Input_Textbox
@@ -113,7 +110,7 @@ ScreenWidth = Main.winfo_screenwidth()
 ScreenHeight = Main.winfo_screenheight()
 Main.geometry("1000x580".format(ScreenWidth, ScreenHeight))
 
-WelcomeLabel = customtkinter.CTkLabel(Main, text="Welcome to the\nMain Page", font=("System", 40, "bold"))
+WelcomeLabel = customtkinter.CTkLabel(Main, text="Arabic Text Summarizer", font=("System", 40, "bold"))
 ContinueButton = customtkinter.CTkButton(Main, text="Continue", command=lambda: MainGUI.Continue(),  width=500, height=125, font=("System", 40, "bold"), fg_color="darkgreen")
 QuitButton = customtkinter.CTkButton(Main, text="Quit", command=quit, width=500, height=125, font=("System", 40, "bold"), fg_color="darkgreen")
 WelcomeLabel.place(x=ScreenWidth/2-450, y=ScreenHeight/2 - 450, anchor="center")
