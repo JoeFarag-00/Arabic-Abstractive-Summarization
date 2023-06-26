@@ -115,7 +115,8 @@ open(removed_pg_path, 'w').close()
 open(removed_sum_path, 'w').close()
 
 processed_data = []
-pkl_save = []
+Final_Paragraphs = []
+Final_Summaries = []
 preprocessed_qalsadi = []
 final_records_ct = 0
 
@@ -126,6 +127,9 @@ for index, row in df.iterrows():
     
     processed_data.append({'paragraph': ' '.join(preprocessed_Paragraph), 'summary': ' '.join(preprocessed_Summary)})
 
+    Final_Paragraphs.append(preprocessed_Paragraph)
+    Final_Summaries.append(preprocessed_Summary)
+    
     # preprocessed_Paragraph_qalsadi = Preprocessor.Preprocess_Qalsadi(row['paragraph'])
     # preprocessed_Summary_qalsadi = Preprocessor.Preprocess_Qalsadi(row['summary'])
     
@@ -151,3 +155,9 @@ print("Processed Dataset Records: ", final_records_ct)
 
 # processed_df = pd.DataFrame(preprocessed_qalsadi)
 # processed_df.to_csv(processed_records_Qalpath, index=False)
+
+with open('Debug/Primary/Processed_Paragraphs.pkl', 'wb') as f:
+    pickle.dump(Final_Paragraphs, f)
+
+with open('Debug/Primary/Processed_Summaries.pkl', 'wb') as f:
+    pickle.dump(Final_Summaries, f)
