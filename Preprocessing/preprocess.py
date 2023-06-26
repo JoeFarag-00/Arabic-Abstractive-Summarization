@@ -89,6 +89,7 @@ class Preprocessor():
                     Ftokens.append(token)
 
         processed_text = ''.join(Ftokens)
+        #SPLIT LETTERS ISSUE
         return processed_text
     
     def Default_Preprocess(text):
