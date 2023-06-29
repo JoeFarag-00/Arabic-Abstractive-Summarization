@@ -17,7 +17,7 @@ start_index = 1
 end_index = 10
 
 options = webdriver.ChromeOptions()
-# options.add_argument('--headless')
+options.add_argument('--headless')
 driver = webdriver.Chrome(options=options)
 driver.get('https://www.paraphrasetool.com/')
 combined_df = pd.read_csv(combined_dataset_file)
@@ -81,7 +81,7 @@ for index, row in tqdm(combined_df[start_index-1:end_index].iterrows(), total=(e
         print("Error on ", index)
         driver.quit()
         options = webdriver.ChromeOptions()
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         driver = webdriver.Chrome(options=options)
         driver.get('https://www.paraphrasetool.com/')
         summary = row['summary']
