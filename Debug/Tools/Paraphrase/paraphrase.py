@@ -12,23 +12,26 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
-combined_dataset_file = 'Datasets/Primary Datasets/BBC Arabic/ComBBC.csv'
+combined_dataset_file = 'Datasets/Primary Datasets/BBC Arabic/FiltBBC.csv'
 start_index = 1
-end_index = 10
+end_index = 5000
 
 options = webdriver.ChromeOptions()
-options.add_argument('--headless')
+# options.add_argument('--headless')
 driver = webdriver.Chrome(options=options)
 driver.get('https://www.paraphrasetool.com/')
 combined_df = pd.read_csv(combined_dataset_file)
 modified_df = pd.DataFrame(columns=['text', 'psummary'])
 download_directory = "C:/Users/youss/Downloads"
 
-dropdown_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'text_entry_text_entrydropdown_holder')))
-dropdown_button.click()
+try:
+    dropdown_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'text_entry_text_entrydropdown_holder')))
+    dropdown_button.click()
 
-diplomatic_option = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//li[@data-value="diplomatic"]')))
-diplomatic_option.click()
+    diplomatic_option = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//li[@data-value="diplomatic"]')))
+    diplomatic_option.click()
+except:
+    pass
 
 time.sleep(2)
 
@@ -76,22 +79,25 @@ for index, row in tqdm(combined_df[start_index-1:end_index].iterrows(), total=(e
 
             modified_df = modified_df.append({'text': text, 'psummary': downloaded_text}, ignore_index=True)
             os.remove(downloaded_file)
-            modified_df.to_csv('Debug/Tools/Edited Dataset/modified_dataset.csv', index=False)
+            modified_df.to_csv('Debug/Tools/Paraphrase/Paraphrased Dataset/ModDataset.csv', index=False)
     except:
         print("Error on ", index)
         driver.quit()
         options = webdriver.ChromeOptions()
-        options.add_argument('--headless')
+        # options.add_argument('--headless')
         driver = webdriver.Chrome(options=options)
         driver.get('https://www.paraphrasetool.com/')
         summary = row['summary']
         text = row['text']
         
-        dropdown_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'text_entry_text_entrydropdown_holder')))
-        dropdown_button.click()
+        try:
+            dropdown_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'text_entry_text_entrydropdown_holder')))
+            dropdown_button.click()
 
-        diplomatic_option = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//li[@data-value="diplomatic"]')))
-        diplomatic_option.click()
+            diplomatic_option = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//li[@data-value="diplomatic"]')))
+            diplomatic_option.click()
+        except:
+            pass
 
         time.sleep(2)
 
@@ -126,4 +132,4 @@ for index, row in tqdm(combined_df[start_index-1:end_index].iterrows(), total=(e
 
             modified_df = modified_df.append({'text': text, 'psummary': downloaded_text}, ignore_index=True)
             os.remove(downloaded_file)
-            modified_df.to_csv('Debug/Tools/Generated Dataset/modified_dataset.csv', index=False)
+            modified_df.to_csv('Debug/Tools/Paraphrase/Paraphrased Dataset/ModDataset.csv', index=False)
