@@ -14,7 +14,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 combined_dataset_file = 'Datasets/Primary Datasets/BBC Arabic/FiltBBC.csv'
 start_index = 1
-end_index = 5000
+end_index = 353
 
 options = webdriver.ChromeOptions()
 # options.add_argument('--headless')
