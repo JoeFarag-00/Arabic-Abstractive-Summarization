@@ -24,6 +24,7 @@ class DatasetStats:
         record_size = len(self.data)
 
         return {
+            
             'Avg Text Word Count': avg_text_word_count,
             'Max Text Word Count': max_text_word_count,
             'Min Text Word Count': min_text_word_count,
